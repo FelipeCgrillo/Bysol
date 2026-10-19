@@ -31,18 +31,11 @@ const observer = new IntersectionObserver(
 );
 sections.forEach((s) => observer.observe(s));
 
-// Reserva: abre WhatsApp con los datos del formulario
+// WhatsApp: todos los enlaces comparten número y mensaje inicial
 const WHATSAPP = "56900000000";
-document.getElementById("reserva").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const data = new FormData(e.target);
-  const text =
-    `Hola BYSOL, quiero reservar una hora.\n` +
-    `Nombre: ${data.get("nombre")}\n` +
-    `Teléfono: ${data.get("telefono")}\n` +
-    `Servicio: ${data.get("servicio")}\n` +
-    `Mensaje: ${data.get("mensaje") || ""}`;
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+const WA_TEXT = "Hola BYSOL, quiero agendar una hora.";
+document.querySelectorAll(".js-wa").forEach((a) => {
+  a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(WA_TEXT)}`;
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
